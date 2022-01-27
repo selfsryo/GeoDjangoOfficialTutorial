@@ -1,19 +1,17 @@
 from rest_framework import viewsets
 from rest_framework_gis.filters import DistanceToPointFilter, InBBoxFilter
-from rest_framework.pagination import PageNumberPagination
 from rest_framework_gis.pagination import GeoJsonPagination
 from world.serializers import WorldBorderSerializer
 from world.models import WorldBorder
 
-
-class MyPagination(PageNumberPagination):
+class MyPagination(GeoJsonPagination):
     page_size_query_param = 'page_size'
 
 class WorldBorderViewSet(viewsets.ModelViewSet):
     queryset = WorldBorder.objects.all()
     serializer_class = WorldBorderSerializer
     pagination_class = MyPagination
-    # page_size_query_param = 'page_size'
-    filter_backends = (DistanceToPointFilter,)
+    filter_backends = (DistanceToPointFilter, InBBoxFilter)
     distance_filter_field = 'mpoly'
-    distance_filter_convert_meters = True
+    bbox_filter_field = 'mpoly'
+    bbox_filter_include_overlapping = True
