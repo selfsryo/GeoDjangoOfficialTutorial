@@ -37,5 +37,5 @@ https://thematicmapping.org/downloads/TM_WORLD_BORDERS-0.3.zip
 
 
 ## Browsable API
-以下にアクセス
+コンテナを起動した状態で以下にアクセス<br>
 http://localhost:8000/world/
